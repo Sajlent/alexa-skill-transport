@@ -1,0 +1,64 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "transport in london",
+      "intents": [
+        {
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": [
+            "stop"
+          ]
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "GetTravelRoute",
+          "slots": [
+            {
+              "name": "from",
+              "type": "AMAZON.StreetName"
+            },
+            {
+              "name": "to",
+              "type": "AMAZON.StreetName"
+            }
+          ],
+          "samples": [
+            "travel from {from} to {to}"
+          ]
+        }
+      ],
+      "types": [
+        {
+          "name": "stopName",
+          "values": [
+            {
+              "name": {
+                "value": "bank"
+              }
+            },
+            {
+              "name": {
+                "value": "westminster"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
