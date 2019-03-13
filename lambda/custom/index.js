@@ -14,6 +14,7 @@ const HELP_MESSAGE = 'You can say tell me a space fact, or, you can say exit... 
 const HELP_REPROMPT = 'What can I help you with?';
 const FALLBACK_MESSAGE = 'The Space Facts skill can\'t help you with that.  It can help you discover facts about space if you say tell me a space fact. What can I help you with?';
 const FALLBACK_REPROMPT = 'What can I help you with?';
+const AJAX_ERROR_MESSAGE = 'There\'s a problem with data source:';
 const STOP_MESSAGE = 'Goodbye!';
 
 //=========================================================================================================================================
@@ -40,8 +41,11 @@ const GetTravelStopsHandler = {
     const slots = handlerInput.requestEnvelope.request.intent.slots;
     const from = slots['from'].value;
     const to = slots['to'].value;
-    //const randomFact = cookbook.getRandomItem(data);
-    const speechOutput = `Here's your route: from ${from} to ${to}`;
+    let speechOutput = 'test in handler';
+    let route = 'test in handler';
+
+    route = await cookbook.getTransportData(from, to);
+    speechOutput = `Here's your route: ${route}`;
 
     return handlerInput.responseBuilder
       .speak(speechOutput)

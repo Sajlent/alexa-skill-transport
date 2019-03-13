@@ -2,6 +2,7 @@
 /* eslint-disable  no-console */
 // *eslint : extend airbnb
 
+const https = require('https');
 const cookbookVersion = 0.01;
 
 const speechcons = ['abracadabra', 'achoo', 'aha', 'ahem', 'ahoy', 'all righty', 'aloha',
@@ -34,6 +35,30 @@ const speechcons = ['abracadabra', 'achoo', 'aha', 'ahem', 'ahoy', 'all righty',
 //
 module.exports = {
   version: cookbookVersion,
+
+  getTransportData(from, to) {
+    return new Promise((resolve, reject) => {
+      let test = 'test';
+
+      https.get(`https://api.tfl.gov.uk/journey/journeyresults/${from}/to/${to}?app_id=083d1993&app_key=0f919de7af4ed1059a011634bbadae71`, (resp) => {
+        let data = '';
+
+        // A chunk of data has been recieved.
+        resp.on('data', (chunk) => {
+          data += chunk;
+        });
+
+        resp.on('end', () => {
+          test = JSON.parse(data);
+          resolve(test);
+        });
+
+      }).on("error", (err) => {
+        reject(err);
+      });
+    });
+  },
+
   //
   // Core Voice UI Helpers
   //
